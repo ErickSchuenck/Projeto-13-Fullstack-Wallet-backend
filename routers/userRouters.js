@@ -5,5 +5,5 @@ import { registerUser } from './../controllers/userPostController.js'
 const userRoutes = express.Router()
 
 userRoutes.post('/users', registerUser)
-userRoutes.get('/users', login)
+userRoutes.post('/login', login)
 export default userRoutes
