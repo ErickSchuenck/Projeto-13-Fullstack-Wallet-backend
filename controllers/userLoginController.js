@@ -21,10 +21,7 @@ export async function login(req, res) {
       res.send('Incorrect password')
     }
     else {
-      console.log(
-        user._id,
-        token,
-      )
+      users.updateOne({ email }, { $set: { token } })
       res.send(
         {
           id: user._id,
