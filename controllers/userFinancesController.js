@@ -3,9 +3,9 @@ import bcrypt from 'bcrypt'
 const users = db.collection("users");
 
 export async function withdraw(req, res) {
-  const { value, type, title, token } = req.body
+  const { value, type, title, token, date } = req.body
   try {
-    users.updateOne({ token }, { $push: { finances: [{ value, type, title }] } })
+    users.updateOne({ token }, { $push: { finances: [{ value, type, title, date }] } })
     res.sendStatus(200)
   }
   catch (error) {
@@ -14,9 +14,9 @@ export async function withdraw(req, res) {
 }
 
 export async function deposit(req, res) {
-  const { value, type, title, token } = req.body
+  const { value, type, title, token, date } = req.body
   try {
-    users.updateOne({ token }, { $push: { finances: [{ value, type, title }] } })
+    users.updateOne({ token }, { $push: { finances: [{ value, type, title, date }] } })
     res.sendStatus(200)
   }
   catch (error) {
