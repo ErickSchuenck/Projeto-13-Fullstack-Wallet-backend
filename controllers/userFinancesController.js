@@ -23,3 +23,16 @@ export async function deposit(req, res) {
     res.send(error)
   }
 }
+
+export async function getFinances(req, res) {
+  const { token } = req.body
+  console.log('REQ BODY', req.body)
+  try {
+    const userFinances = await users.findOne({ token: token })
+    console.log('user', user)
+    res.send(user.finances)
+  }
+  catch (error) {
+    res.send(error)
+  }
+}
