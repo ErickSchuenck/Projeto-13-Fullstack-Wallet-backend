@@ -10,7 +10,6 @@ export async function withdraw(req, res) {
   }
   catch (error) {
     res.send(error)
-
   }
 }
 
