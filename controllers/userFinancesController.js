@@ -1,11 +1,10 @@
 import db from './../db.js'
-import bcrypt from 'bcrypt'
 const users = db.collection("users");
 
 export async function withdraw(req, res) {
   const { value, type, title, token, date } = req.body
   try {
-    users.updateOne({ token }, { $push: { finances: [{ value, type, title, date }] } })
+    users.updateOne({ token }, { $push: { finances: { value, type, title, date } } })
     res.sendStatus(200)
   }
   catch (error) {
@@ -16,7 +15,7 @@ export async function withdraw(req, res) {
 export async function deposit(req, res) {
   const { value, type, title, token, date } = req.body
   try {
-    users.updateOne({ token }, { $push: { finances: [{ value, type, title, date }] } })
+    await users.updateOne({ token }, { $push: { finances: { value, type, title, date } } })
     res.sendStatus(200)
   }
   catch (error) {
@@ -25,12 +24,10 @@ export async function deposit(req, res) {
 }
 
 export async function getFinances(req, res) {
-  const { token } = req.body
-  console.log('REQ BODY', req.body)
+  const { token } = req.headers
   try {
     const userFinances = await users.findOne({ token: token })
-    console.log('user', user)
-    res.send(user.finances)
+    res.send({ userFinances })
   }
   catch (error) {
     res.send(error)

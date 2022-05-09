@@ -3,9 +3,10 @@ import bcrypt from 'bcrypt'
 import { v4 } from 'uuid'
 
 const users = db.collection("users");
-const token = v4()
+
 
 export async function login(req, res) {
+  const token = v4()
   console.log(req.body)
 
   const { email, password } = req.body
