@@ -10,7 +10,8 @@ export async function registerUser(req, res) {
     await users.insertOne({
       name,
       email,
-      password: await bcrypt.hash(password, 10)
+      password: await bcrypt.hash(password, 10),
+      finances: []
     })
     res.sendStatus(200)
   }

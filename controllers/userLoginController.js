@@ -1,6 +1,9 @@
 import db from './../db.js'
 import bcrypt from 'bcrypt'
+import { v4 } from 'uuid'
+
 const users = db.collection("users");
+const token = v4()
 
 export async function login(req, res) {
   console.log(req.body)
@@ -18,10 +21,17 @@ export async function login(req, res) {
       res.send('Incorrect password')
     }
     else {
-      res.send(user)
-      res.redirect("/main")
+      console.log(
+        user._id,
+        token,
+      )
+      res.send(
+        {
+          id: user._id,
+          token,
+        }
+      )
     }
-
   }
   catch (error) {
     res.send(error);
